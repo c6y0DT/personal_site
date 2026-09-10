@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zalkar — персональная страница разработчика.">
+  <title>zalkar — разработчик</title>
+  <style>
+    :root { --night:#101d33; --cream:#f8f5ed; --gold:#d99536; --clay:#c85c3f; --muted:#657188; --line:#d9d9d2; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; color:var(--night); background:var(--cream); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; } a { color:inherit; text-decoration:none; } .wrap { width:min(1140px,calc(100% - 40px)); margin:auto; }
+    header { padding:25px 0; } .nav { display:flex; justify-content:space-between; align-items:center; } .brand { font-size:21px; font-weight:850; letter-spacing:-.065em; } .brand i { color:var(--clay); font-style:normal; } .nav a:not(.brand) { color:var(--muted); font-size:14px; } .nav a:not(.brand):hover { color:var(--night); }
+    .hero { min-height:645px; padding:82px 0 90px; position:relative; overflow:hidden; } .sun { position:absolute; width:min(52vw,610px); aspect-ratio:1; right:-90px; top:-75px; border-radius:50%; background:var(--gold); opacity:.92; z-index:-1; } .sun::after { content:""; position:absolute; width:43%; height:43%; bottom:0; left:-10%; background:var(--cream); clip-path:polygon(0 100%,100% 100%,100% 0); }
+    .kyrgyz { color:var(--clay); font-size:13px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; } h1 { max-width:850px; margin:20px 0 26px; font-size:clamp(72px,12vw,160px); line-height:.77; letter-spacing:-.1em; text-transform:lowercase; } h1 span { display:block; margin-top:24px; font-size:clamp(27px,3.8vw,51px); letter-spacing:-.06em; color:var(--clay); } .hero-text { max-width:500px; color:var(--muted); font-size:18px; line-height:1.6; } .scroll { display:inline-flex; margin-top:42px; align-items:center; gap:12px; font-size:14px; font-weight:750; } .scroll b { width:35px; height:35px; display:grid; place-items:center; border-radius:50%; background:var(--night); color:#fff; font-size:18px; transition:transform .2s; } .scroll:hover b { transform:translateY(3px); }
+    section { padding:108px 0; } .word { background:var(--night); color:#fff; } .word-grid { display:grid; grid-template-columns:1.15fr .85fr; align-items:center; gap:75px; } .word h2 { margin:0; color:#fff; font-size:clamp(50px,7vw,88px); line-height:.9; letter-spacing:-.08em; } .word h2 em { color:var(--gold); font-style:normal; } .definition { padding:31px; border-left:2px solid var(--gold); background:rgba(255,255,255,.04); } .definition strong { display:block; margin-bottom:13px; color:#f1ca8a; font-size:13px; letter-spacing:.1em; text-transform:uppercase; } .definition p { margin:0; color:#c6cfdd; font-size:17px; line-height:1.6; }
+    .heading { display:grid; grid-template-columns:1fr 2fr; gap:32px; margin-bottom:44px; } .eyebrow { color:var(--clay); font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; } h3 { max-width:690px; margin:0; font-size:clamp(33px,4.4vw,58px); letter-spacing:-.065em; line-height:1.02; } .qualities { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); } .quality { padding:26px 28px 27px 0; border-bottom:1px solid var(--line); } .quality + .quality { padding-left:28px; border-left:1px solid var(--line); } .quality b { display:block; margin-bottom:15px; color:var(--clay); font-size:13px; font-family:ui-monospace,monospace; } .quality h4 { margin:0 0 12px; font-size:22px; letter-spacing:-.045em; } .quality p { margin:0; color:var(--muted); font-size:15px; line-height:1.55; }
+    footer { padding:31px 0; background:var(--night); color:#c6cfdd; font-size:13px; } .footer { display:flex; justify-content:space-between; gap:15px; } .footer b { color:var(--gold); }
+    @media (max-width:720px) { .hero { min-height:570px; padding-top:65px; } .sun { width:410px; right:-230px; top:-25px; } .word-grid,.heading { grid-template-columns:1fr; gap:24px; } section { padding:75px 0; } .qualities { grid-template-columns:1fr; } .quality + .quality { padding-left:0; border-left:0; } .footer { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header class="wrap"><nav class="nav" aria-label="Навигация"><a class="brand" href="#top">zal<i>kar</i></a><a href="#meaning">Мааниси / значение</a></nav></header>
+  <main id="top">
+    <section class="hero wrap"><div class="sun" aria-hidden="true"></div><div class="kyrgyz">Сөз. Ысым. Маани.</div><h1>zalkar<span>Масштаб в каждом деле.</span></h1><p class="hero-text">Не просто имя. «Залкар» — слово с характером: о том, что заметно, сильно и оставляет след.</p><a class="scroll" href="#meaning">Узнать значение <b>↓</b></a></section>
+    <section class="word" id="meaning"><div class="wrap word-grid"><h2>Залкар —<br><em>больше,</em><br>чем имя.</h2><div class="definition"><strong>залкар · сын атооч</strong><p>В кыргызском языке — «очень большой, выдающийся, масштабный». Так говорят о человеке и деле, которые выделяются своим значением.</p></div></div></section>
+    <section class="wrap"><div class="heading"><div class="eyebrow">Как имя</div><h3>Имя становится ориентиром: делать свою работу с размахом и смыслом.</h3></div><div class="qualities"><article class="quality"><b>01</b><h4>Масштаб</h4><p>Видеть задачу целиком и строить решения, которые способны расти вместе с ней.</p></article><article class="quality"><b>02</b><h4>Сила</h4><p>Сохранять ясность, даже когда задача сложная, а путь ещё не очевиден.</p></article><article class="quality"><b>03</b><h4>След</h4><p>Создавать полезное: не просто код, а результат, которым удобно пользоваться.</p></article></div></section>
+  </main>
+  <footer><div class="wrap footer"><span><b>zalkar</b> · Масштаб в каждом деле</span><span>© 2026</span></div></footer>
+</body>
+</html>
