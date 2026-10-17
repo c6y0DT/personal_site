@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Моя система планирования</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --paper: #ffffff;
+      --text: #20283a;
+      --muted: #657089;
+      --accent: #5267d8;
+      --accent-soft: #edf0ff;
+      --line: #e2e7f0;
+      --green: #2f8067;
+      --green-soft: #eaf7f1;
+      --gold: #9b6b19;
+      --gold-soft: #fff5df;
+      --shadow: 0 12px 34px rgba(34, 48, 85, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 32px 16px;
+      background:
+        radial-gradient(circle at 10% 0%, #e7ebff 0, transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(24px, 5vw, 58px);
+      background: var(--paper);
+      border: 1px solid rgba(226, 231, 240, .9);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.25; }
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2.1rem, 6vw, 3.5rem);
+      letter-spacing: -.045em;
+    }
+
+    .subtitle {
+      margin: 18px 0 28px;
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .intro {
+      padding: 22px 24px;
+      background: linear-gradient(135deg, var(--accent-soft), #f7f8ff);
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+      margin: 28px 0 38px;
+    }
+
+    .intro p { margin: 0; }
+
+    .contents {
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      margin: 0 0 42px;
+    }
+
+    .contents h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .contents ol {
+      margin: 0;
+      padding-left: 22px;
+      columns: 2;
+      column-gap: 32px;
+    }
+
+    .contents li { break-inside: avoid; margin: 4px 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    section { margin: 0 0 42px; scroll-margin-top: 20px; }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      font-size: clamp(1.45rem, 3vw, 1.85rem);
+      letter-spacing: -.025em;
+    }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .95rem;
+      font-weight: 800;
+    }
+
+    h3 {
+      margin: 25px 0 8px;
+      font-size: 1.12rem;
+    }
+
+    p { margin: 0 0 14px; }
+    ul, ol { padding-left: 24px; }
+    li { margin: 7px 0; }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .principle {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .principle h3 { margin: 0 0 7px; }
+    .principle p { margin: 0; color: var(--muted); font-size: .96rem; }
+
+    .note {
+      margin: 20px 0;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--green-soft);
+      border: 1px solid #d6eee3;
+    }
+
+    .note strong { color: var(--green); }
+
+    .caution {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--gold-soft);
+      border: 1px solid #f2e4bf;
+    }
+
+    .tree {
+      margin: 22px 0;
+      padding: 22px;
+      border: 1px dashed #c8d0e4;
+      border-radius: 16px;
+      background: #fafbff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .93rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .quote {
+      margin: 28px 0;
+      padding: 24px 26px;
+      border-radius: 16px;
+      background: #20283a;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 650;
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 8px;
+      color: #c5cce0;
+      font-size: .86rem;
+      font-weight: 400;
+    }
+
+    .summary-list {
+      padding: 22px 26px;
+      background: #f7f8fc;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+    }
+
+    .summary-list li::marker { color: var(--accent); }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 12px 8px; }
+      .page { padding: 24px 19px; border-radius: 17px; }
+      .contents ol { columns: 1; }
+      .principles { grid-template-columns: 1fr; }
+      .intro { padding: 18px; }
+    }
+
+    @media print {
+      body { padding: 0; background: white; }
+      .page { max-width: none; padding: 0; border: 0; box-shadow: none; }
+      .contents a { color: inherit; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">Личная система · версия 1.0</p>
+      <h1>Моя система планирования</h1>
+      <p class="subtitle">Иерархическое дерево задач: один файл, понятная структура и возможность менять путь к цели, не теряя первоначальный замысел.</p>
+    </header>
+
+    <div class="intro">
+      <p><strong>Главная идея:</strong> начинать с общей задачи и постепенно раскрывать её на более конкретные пункты. Так обычный список превращается в личную карту дел, решений и следующих шагов.</p>
+    </div>
+
+    <nav class="contents" aria-label="Содержание">
+      <h2>Содержание</h2>
+      <ol>
+        <li><a href="#concept">Общая концепция</a></li>
+        <li><a href="#principles">Основные принципы</a></li>
+        <li><a href="#task-types">Какие задачи бывают</a></li>
+        <li><a href="#decomposition">Разветвление задач</a></li>
+        <li><a href="#stability">Исходная ветвь и изменения</a></li>
+        <li><a href="#dates">Роль дат</a></li>
+        <li><a href="#benefits">Преимущества</a></li>
+        <li><a href="#limits">Возможные ограничения</a></li>
+        <li><a href="#development">Развитие системы</a></li>
+        <li><a href="#definition">Итоговое определение</a></li>
+      </ol>
+    </nav>
+
+    <section id="concept">
+      <h2><span class="number">01</span> Общая концепция</h2>
+      <p>Моя система планирования появилась из обычного списка дел и покупок. Сначала я просто записывал то, что нужно сделать или приобрести. Со временем стало понятно, что некоторые пункты требуют дополнительных решений, действий и уточнений. Так список постепенно превратился в разветвлённую систему.</p>
+      <p>В основе системы лежит <strong>один файл, в котором находится вся важная информация о задачах</strong>. Внутри него пункты могут быть простыми или сложными. Сложная задача раскрывается через подпункты, а те, в свою очередь, могут иметь собственные ответвления.</p>
+      <p>Поэтому это не просто перечень дел, а структура, которая помогает видеть связь между общей целью и конкретными действиями.</p>
+    </section>
+
+    <section id="principles">
+      <h2><span class="number">02</span> Основные принципы</h2>
+      <div class="principles">
+        <article class="principle">
+          <h3>Одно место</h3>
+          <p>Задачи и связанные с ними мысли собраны в одном файле. Не нужно держать всю систему в памяти или искать информацию в разных местах.</p>
+        </article>
+        <article class="principle">
+          <h3>Иерархия</h3>
+          <p>Общая задача находится выше, а конкретные шаги и уточнения располагаются ниже, как ветви дерева.</p>
+        </article>
+        <article class="principle">
+          <h3>Движение сверху вниз</h3>
+          <p>Сначала фиксируется основная задача, затем она постепенно раскрывается на более мелкие и понятные действия.</p>
+        </article>
+        <article class="principle">
+          <h3>Гибкость исполнения</h3>
+          <p>План можно уточнять и перестраивать по мере появления новой информации и изменения обстоятельств.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="task-types">
+      <h2><span class="number">03</span> Какие задачи могут быть в системе</h2>
+      <p>Внутри списка могут находиться разные виды пунктов. Не каждый из них обязательно должен быть разложен на множество подпунктов.</p>
+      <ul>
+        <li><strong>Простые задачи.</strong> Дела, которые можно выполнить без дополнительного планирования.</li>
+        <li><strong>Задачи с несколькими шагами.</strong> Например, выбрать вещь, заказать её и получить.</li>
+        <li><strong>Задачи, зависящие от условий.</strong> Их выполнение возможно после наступления определённого события или изменения обстоятельств.</li>
+        <li><strong>Вопросы для обдумывания.</strong> Пункты, по которым сначала нужно принять решение.</li>
+        <li><strong>Большие задачи.</strong> Они могут включать несколько уровней уточнений и связанных действий.</li>
+      </ul>
+      <p>Система не требует заранее выбирать для каждого пункта строгую категорию. Структура может возникать естественно, когда становится понятно, что задача нуждается в детализации.</p>
+    </section>
+
+    <section id="decomposition">
+      <h2><span class="number">04</span> Разветвление задач</h2>
+      <p>Если пункт оказывается слишком общим, я могу добавить к нему подпункты. Если и подпункт требует уточнения, он тоже может разветвиться. Так формируется дерево задач с несколькими уровнями.</p>
+
+      <div class="tree">Основная задача
+├── Уточнить, что именно нужно
+├── Принять решение
+│   ├── Сравнить варианты
+│   └── Проверить, подходит ли вариант
+└── Выполнить действие
+    ├── Заказать
+    └── Получить</div>
+
+      <p>Это условный пример, показывающий принцип. Реальное количество ветвей и их содержание определяются самой задачей, а не заранее заданным шаблоном.</p>
+      <p>Разветвление позволяет не смешивать в одном пункте цель, решения и конкретные действия. При этом все они остаются связаны с исходной задачей.</p>
+    </section>
+
+    <section id="stability">
+      <h2><span class="number">05</span> Исходная ветвь и изменения</h2>
+      <p>Важная особенность моего подхода — различать первоначальную запись задачи и её дальнейшее развитие.</p>
+      <p><strong>Исходная ветвь</strong> сохраняет первоначальный замысел. Если спустя время меняются обстоятельства, не обязательно переписывать исходный пункт: можно менять нижние уровни — конкретные действия, варианты и способы достижения цели.</p>
+
+      <div class="note">
+        <strong>Принцип:</strong> исходный замысел остаётся точкой отсчёта, а путь к его выполнению может меняться.
+      </div>
+
+      <p>Так система одновременно сохраняет историю появления задачи и остаётся пригодной для повседневной работы. Если первоначальный способ действий перестал подходить, нижние ветви можно уточнить или заменить, не теряя связь с исходной целью.</p>
+    </section>
+
+    <section id="dates">
+      <h2><span class="number">06</span> Роль дат</h2>
+      <p>Даты в моей системе могут выполнять функцию временных отметок. Они помогают понять, когда была записана первая ветвь задачи или когда возник определённый замысел.</p>
+      <p>Поэтому дата не обязательно означает крайний срок или день, когда задача должна быть выполнена. Её смысл определяется тем, зачем она была добавлена в конкретном месте списка.</p>
+      <p>Такие отметки помогают сохранять временной контекст: можно вспомнить, когда задача появилась и как давно она находится в системе.</p>
+    </section>
+
+    <section id="benefits">
+      <h2><span class="number">07</span> Преимущества системы</h2>
+      <ul>
+        <li><strong>Структурирование.</strong> Разрозненные дела превращаются в более понятную картину.</li>
+        <li><strong>Иерархия.</strong> Видно, какая задача является основной, а какие пункты относятся к ней.</li>
+        <li><strong>Единое место хранения.</strong> Не нужно распределять связанные мысли по множеству отдельных списков.</li>
+        <li><strong>Гибкость.</strong> Можно менять конкретные действия, когда меняются условия.</li>
+        <li><strong>Сохранение первоначального замысла.</strong> Исходная запись остаётся ориентиром для последующих решений.</li>
+        <li><strong>Постепенное развитие.</strong> Необязательно продумывать всю структуру заранее — она может появляться по мере необходимости.</li>
+        <li><strong>Поддержка мышления.</strong> Запись помогает вынести задачи из головы и увидеть, какие вопросы ещё нужно решить.</li>
+      </ul>
+    </section>
+
+    <section id="limits">
+      <h2><span class="number">08</span> Возможные ограничения</h2>
+      <p>Как и любой способ организации задач, моя система может создавать определённые трудности. Это не означает, что её нужно менять заранее; скорее, полезно замечать такие моменты по мере использования.</p>
+      <ul>
+        <li><strong>Слишком большое дерево.</strong> Если у задачи становится много уровней и ветвей, нужный пункт может быть сложнее найти.</li>
+        <li><strong>Разный характер записей.</strong> В одном файле могут соседствовать покупки, вопросы, планы и заметки.</li>
+        <li><strong>Неочевидное состояние задачи.</strong> Из самого наличия пункта не всегда понятно, выполнен он, отложен или всё ещё требует решения.</li>
+        <li><strong>Приоритеты не возникают автоматически.</strong> Иерархия показывает связь пунктов, но сама по себе не определяет, что нужно сделать в первую очередь.</li>
+      </ul>
+      <div class="caution">
+        <strong>Важно:</strong> эти пункты — возможные ограничения, а не обязательные недостатки. Имеет смысл реагировать на них только тогда, когда они действительно мешают пользоваться системой.
+      </div>
+    </section>
+
+    <section id="development">
+      <h2><span class="number">09</span> Как развивается система</h2>
+      <p>Моя система создавалась самостоятельно, без необходимости сразу принимать чужую готовую методику. Её форма возникла из реальных задач и постепенно менялась вместе с тем, как я начинал лучше понимать собственный способ организации дел.</p>
+      <p>Поэтому развитие системы тоже может происходить интуитивно. Если в процессе использования обнаруживается неудобство, можно подумать, как его устранить, и проверить новое решение на практике.</p>
+      <p>Главное — не усложнять систему без причины и не вводить правила только ради того, чтобы они существовали. Изменения должны помогать лучше видеть задачи и работать с ними.</p>
+    </section>
+
+    <section id="definition">
+      <h2><span class="number">10</span> Итоговое определение</h2>
+      <p>Моя система планирования — это личный способ организации задач в одном файле с помощью иерархии и вложенных пунктов. Она начинается с общей записи, которая при необходимости раскрывается в дерево конкретных действий, решений и уточнений.</p>
+      <p>Исходная ветвь помогает сохранить первоначальный замысел и временной контекст его появления. Нижние ветви остаются гибкими и могут изменяться по мере того, как меняются обстоятельства или становится понятнее способ достижения цели.</p>
+
+      <div class="quote">
+        Сохранять исходную ветвь, но оставлять возможность изменять путь к цели.
+        <small>Краткое выражение основного принципа моей системы планирования</small>
+      </div>
+
+      <div class="summary-list">
+        <strong>Коротко о системе:</strong>
+        <ul>
+          <li>все задачи собраны в одном месте;</li>
+          <li>сложные задачи раскрываются через подпункты;</li>
+          <li>структура развивается сверху вниз;</li>
+          <li>исходный замысел сохраняется;</li>
+          <li>конкретные действия можно менять;</li>
+          <li>даты помогают отмечать историю появления задач;</li>
+          <li>система развивается на основе личного опыта.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      Автор системы планирования - Залкар, студент ОшГУ
+      <br><small>Сайт сделан с помощью вайбкодинга</small>
+    </footer>
+  </main>
+</body>
+</html>
+
+
+
